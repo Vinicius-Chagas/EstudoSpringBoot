@@ -1,10 +1,7 @@
 package med.voll.EstudoSpringBoot.paciente;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import med.voll.EstudoSpringBoot.endereco.DadosEndereco;
 import med.voll.EstudoSpringBoot.endereco.Endereco;
 
@@ -14,6 +11,7 @@ import med.voll.EstudoSpringBoot.endereco.Endereco;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Paciente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
