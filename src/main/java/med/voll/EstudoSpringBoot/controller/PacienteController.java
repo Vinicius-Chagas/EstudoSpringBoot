@@ -1,6 +1,11 @@
 package med.voll.EstudoSpringBoot.controller;
 
-import med.voll.EstudoSpringBoot.Pacientes.DadosPaciente;
+import jakarta.validation.Valid;
+import med.voll.EstudoSpringBoot.paciente.DadosPaciente;
+import med.voll.EstudoSpringBoot.paciente.Paciente;
+import med.voll.EstudoSpringBoot.paciente.PacienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("pacientes")
 public class PacienteController {
 
-    @PostMapping
-    public void pacientes(@RequestBody DadosPaciente paciente){
+    @Autowired
+    private PacienteRepository repository;
 
-        System.out.println(paciente);
+    @PostMapping
+    @Transactional
+    public void pacientes(@RequestBody @Valid DadosPaciente paciente){
+        repository.save(new Paciente(paciente));
 
     }
 
