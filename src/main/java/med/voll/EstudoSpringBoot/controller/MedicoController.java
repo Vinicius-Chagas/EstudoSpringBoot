@@ -2,13 +2,11 @@ package med.voll.EstudoSpringBoot.controller;
 
 
 import jakarta.validation.Valid;
-import med.voll.EstudoSpringBoot.medico.DadosListagemMedicos;
-import med.voll.EstudoSpringBoot.medico.DadosMedicos;
-import med.voll.EstudoSpringBoot.medico.Medico;
-import med.voll.EstudoSpringBoot.medico.MedicoRepository;
+import med.voll.EstudoSpringBoot.medico.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +27,23 @@ public class MedicoController {
     }
 
     @GetMapping
-    public Page<DadosListagemMedicos> listar(@PageableDefault(size=1, page=1, sort = {"nome"}) Pageable pagina){
-        return repository.findAll(pagina).map(DadosListagemMedicos::new);
+    public Page<DadosListagemMedicos> listar(@PageableDefault(sort = {"nome"}) Pageable pagina){
+        return repository.findAllByInativoFalse(pagina).map(DadosListagemMedicos::new);
+
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizar(@RequestBody @Valid DadosMedicosAtt dados){
+        var medico = repository.getReferenceById(dados.id());
+        medico.atualizarInformacoes(dados);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id){
+        var medico = repository.getReferenceById(id);
+        medico.inativo();
     }
 
 }

@@ -14,3 +14,4 @@ CREATE TABLE pacientes(
 
     primary key(id)
 );
+
