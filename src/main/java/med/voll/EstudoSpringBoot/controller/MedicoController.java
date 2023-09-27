@@ -3,13 +3,16 @@ package med.voll.EstudoSpringBoot.controller;
 
 import jakarta.validation.Valid;
 import med.voll.EstudoSpringBoot.medico.*;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -21,29 +24,41 @@ public class MedicoController {
     private MedicoRepository repository;
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid DadosMedicos medico){
-        repository.save(new Medico(medico));
+    //O padrao é responder 201(created) para metodos cadastrar, mas o metodo requer a uri do objeto e o objeto criado no banco de dados como retorno.
+    public ResponseEntity cadastrar(@RequestBody @Valid DadosMedicos medico, UriComponentsBuilder uriBuilder){
+        var item = new Medico(medico);
+        repository.save(item);
+        var uri = uriBuilder.path("/medicos/{id}").buildAndExpand(item.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(item));
 
     }
 
     @GetMapping
-    public Page<DadosListagemMedicos> listar(@PageableDefault(sort = {"nome"}) Pageable pagina){
-        return repository.findAllByInativoFalse(pagina).map(DadosListagemMedicos::new);
+    public ResponseEntity<Page<DadosListagemMedicos>> listar(@PageableDefault(sort = {"nome"}) Pageable pagina){
+        var page = repository.findAllByInativoFalse(pagina).map(DadosListagemMedicos::new);
+
+        return ResponseEntity.ok(page);
 
     }
 
+    //É uma boa pratica criar um objeto de detalhamento para devolver quando atualizar o registro
     @PutMapping
     @Transactional
-    public void atualizar(@RequestBody @Valid DadosMedicosAtt dados){
+    public ResponseEntity atualizar(@RequestBody @Valid DadosMedicosAtt dados){
         var medico = repository.getReferenceById(dados.id());
         medico.atualizarInformacoes(dados);
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }
 
+
+    // NoContent é a boa pratica para resposta de metodos delete
     @DeleteMapping("/{id}")
     @Transactional
-    public void delete(@PathVariable Long id){
+    public ResponseEntity delete(@PathVariable Long id){
         var medico = repository.getReferenceById(id);
         medico.inativo();
+        return ResponseEntity.noContent().build();
     }
 
 }
