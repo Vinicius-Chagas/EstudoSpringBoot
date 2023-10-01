@@ -1,6 +1,4 @@
-package med.voll.EstudoSpringBoot.medico;
-
-import lombok.AllArgsConstructor;
+package med.voll.EstudoSpringBoot.domain.medico;
 
 
 public record DadosListagemMedicos(

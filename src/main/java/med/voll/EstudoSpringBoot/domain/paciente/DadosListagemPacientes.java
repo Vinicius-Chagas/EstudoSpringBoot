@@ -1,4 +1,4 @@
-package med.voll.EstudoSpringBoot.paciente;
+package med.voll.EstudoSpringBoot.domain.paciente;
 
 public record DadosListagemPacientes(
         String nome,

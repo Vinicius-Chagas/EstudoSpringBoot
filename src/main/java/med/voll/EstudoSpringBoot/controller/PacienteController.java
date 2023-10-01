@@ -1,9 +1,9 @@
 package med.voll.EstudoSpringBoot.controller;
 
 import jakarta.validation.Valid;
-import med.voll.EstudoSpringBoot.medico.DadosListagemMedicos;
-import med.voll.EstudoSpringBoot.medico.DadosMedicosAtt;
-import med.voll.EstudoSpringBoot.paciente.*;
+
+import med.voll.EstudoSpringBoot.domain.paciente.*;
+import med.voll.EstudoSpringBoot.domain.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,7 +57,7 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity detalhes(@PathVariable Long id){
-        var paciente = repository.getReferenceByInativoFalse(id);
+        var paciente = repository.getReferenceById(id);
         return ResponseEntity.ok(new DadosDetalhamentoPaciente(paciente));
     }
 

@@ -1,4 +1,4 @@
-package med.voll.EstudoSpringBoot.medico;
+package med.voll.EstudoSpringBoot.domain.medico;
 
 public enum Especialidade {
     ORTOPEDIA,

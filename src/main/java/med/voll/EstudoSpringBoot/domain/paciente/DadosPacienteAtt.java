@@ -1,9 +1,8 @@
-package med.voll.EstudoSpringBoot.paciente;
+package med.voll.EstudoSpringBoot.domain.paciente;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import med.voll.EstudoSpringBoot.endereco.DadosEndereco;
+import med.voll.EstudoSpringBoot.domain.endereco.DadosEndereco;
 import org.springframework.validation.annotation.Validated;
 
 public record DadosPacienteAtt(

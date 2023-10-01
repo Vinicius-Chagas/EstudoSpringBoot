@@ -1,8 +1,8 @@
-package med.voll.EstudoSpringBoot.medico;
+package med.voll.EstudoSpringBoot.domain.medico;
 
 import jakarta.persistence.*;
 import lombok.*;
-import med.voll.EstudoSpringBoot.endereco.Endereco;
+import med.voll.EstudoSpringBoot.domain.endereco.Endereco;
 
 @Entity(name = "Medico")
 @Table(name = "medicos")

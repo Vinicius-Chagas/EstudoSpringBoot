@@ -1,6 +1,6 @@
-package med.voll.EstudoSpringBoot.paciente;
+package med.voll.EstudoSpringBoot.domain.paciente;
 
-import med.voll.EstudoSpringBoot.endereco.Endereco;
+import med.voll.EstudoSpringBoot.domain.endereco.Endereco;
 
 public record DadosDetalhamentoPaciente(
         String nome,

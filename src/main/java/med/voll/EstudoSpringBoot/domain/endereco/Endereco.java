@@ -1,4 +1,4 @@
-package med.voll.EstudoSpringBoot.endereco;
+package med.voll.EstudoSpringBoot.domain.endereco;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
