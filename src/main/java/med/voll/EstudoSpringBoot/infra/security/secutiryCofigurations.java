@@ -19,16 +19,16 @@ public class secutiryCofigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(crsf -> crsf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .build();
+                .build(); // Desabilita o Statefull e define Stateless como padrão
     }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
-        return configuration.getAuthenticationManager();
+        return configuration.getAuthenticationManager(); //Builder do manager de autenticação usado no controller
     }
 
     @Bean
     public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(); //Encoder de senhas para autenticação no controller
     }
 }

@@ -3,7 +3,7 @@ package med.voll.EstudoSpringBoot.controller;
 import jakarta.validation.Valid;
 import med.voll.EstudoSpringBoot.domain.usuario.DadosAutenticacao;
 import med.voll.EstudoSpringBoot.domain.usuario.Usuario;
-import med.voll.EstudoSpringBoot.domain.usuario.UsuarioRepository;
+import med.voll.EstudoSpringBoot.infra.security.TokenDadosJwT;
 import med.voll.EstudoSpringBoot.infra.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,10 +26,11 @@ public class LoginController {
 
     @PostMapping
     public ResponseEntity login(@RequestBody @Valid DadosAutenticacao dados){
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+        var authToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha()); //Select no banco
+        var authentication = manager.authenticate(authToken); // Autentica o resultado do select
+        var tokenJwt = tokenService.gerarToken((Usuario) authentication.getPrincipal()); // Gera um toke para o usuario
 
-        return ResponseEntity.ok(tokenService.gerarToken((Usuario) authentication.getPrincipal()));
+        return ResponseEntity.ok(new TokenDadosJwT(tokenJwt));
     }
 
 

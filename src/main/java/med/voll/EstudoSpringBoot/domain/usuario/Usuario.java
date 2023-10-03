@@ -15,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails { //Implementa interface padrão do spring security
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
