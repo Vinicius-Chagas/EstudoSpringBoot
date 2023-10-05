@@ -51,4 +51,5 @@ public class Medico {
     public void inativo() {
         this.inativo = true;
     }
+
 }
