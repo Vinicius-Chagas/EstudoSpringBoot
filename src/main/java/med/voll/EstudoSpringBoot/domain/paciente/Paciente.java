@@ -49,4 +49,5 @@ public class Paciente {
     public void inativo(){
         this.inativo = true;
     }
-}
+
+    }

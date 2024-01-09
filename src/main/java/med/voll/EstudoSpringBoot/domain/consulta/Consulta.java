@@ -27,10 +27,19 @@ public class Consulta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
-
+    private MotivoCancelamento motivoCancelamento;
     private LocalDateTime data;
+
 
     public Consulta(DadosConsulta dados) {
         this.data = dados.data();
+    }
+
+    public Consulta(Long id, Medico medico, Paciente paciente, LocalDateTime data) {
+    }
+
+
+    public void cancelar(MotivoCancelamento motivo) {
+        this.motivoCancelamento = motivo;
     }
 }

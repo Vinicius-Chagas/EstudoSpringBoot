@@ -8,12 +8,12 @@ import java.time.LocalDateTime;
 
 public record DadosConsulta(
 
-        long idMedico,
+
+        Long idMedico,
         @NotNull
-        long idPaciente,
+        Long idPaciente,
         @NotNull
         @Future
         LocalDateTime data,
-
         Especialidade especialidade) {
 }
