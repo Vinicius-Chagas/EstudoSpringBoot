@@ -4,11 +4,13 @@ import jakarta.validation.ValidationException;
 import med.voll.EstudoSpringBoot.domain.consulta.DadosConsulta;
 import med.voll.EstudoSpringBoot.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidadorPacienteInativo {
+@Component
+public class ValidadorPacienteInativo implements ValidadorAgendamentoConsulta{
     @Autowired
     PacienteRepository repository;
-    public void Validar(DadosConsulta dados){
+    public void validar(DadosConsulta dados){
 
         var paciente = repository.getReferenceById(dados.idPaciente());
 

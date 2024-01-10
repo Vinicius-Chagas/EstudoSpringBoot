@@ -5,11 +5,13 @@ import med.voll.EstudoSpringBoot.domain.consulta.DadosConsulta;
 import med.voll.EstudoSpringBoot.domain.medico.MedicoRepository;
 import med.voll.EstudoSpringBoot.domain.paciente.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
-public class ValidadosMedicoInativo {
+@Component
+public class ValidadosMedicoInativo implements ValidadorAgendamentoConsulta{
     @Autowired
     MedicoRepository repository;
-    public void Validar(DadosConsulta dados){
+    public void validar(DadosConsulta dados){
 
         if(dados.idMedico() == null){
             return;

@@ -2,6 +2,7 @@ package med.voll.EstudoSpringBoot.domain.consulta;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.ValidationException;
+import med.voll.EstudoSpringBoot.domain.consulta.validacoes.ValidadorAgendamentoConsulta;
 import med.voll.EstudoSpringBoot.domain.medico.Especialidade;
 import med.voll.EstudoSpringBoot.domain.medico.Medico;
 import med.voll.EstudoSpringBoot.domain.medico.MedicoRepository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class AgendaDeConsultas {
@@ -24,6 +26,9 @@ public class AgendaDeConsultas {
     @Autowired
     private PacienteRepository pacienteRepository;
 
+    @Autowired
+    private List<ValidadorAgendamentoConsulta> validadores;
+
     public void agendar(DadosConsulta dados){
 
         if(!pacienteRepository.existsById(dados.idPaciente())){
@@ -32,6 +37,8 @@ public class AgendaDeConsultas {
         if(!medicoRepository.existsById(dados.idMedico())){
             throw new ValidationException("ID informado para o médico não existe");
         }
+
+        validadores.forEach(v -> v.validar(dados));
 
         var medico = escolherMedico(dados);
         var paciente = pacienteRepository.getReferenceById(dados.idPaciente());
