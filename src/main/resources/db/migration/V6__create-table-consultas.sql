@@ -1,4 +1,4 @@
-CREATE TABLE cadastros(
+CREATE TABLE consultas(
 id BIGINT NOT NULL AUTO_INCREMENT,
 medico_id BIGINT NOT NULL,
 paciente_id BIGINT NOT NULL,
