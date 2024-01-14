@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import med.voll.EstudoSpringBoot.domain.endereco.Endereco;
 
-@Entity(name = "Medico")
+@Entity(name = "medicos")
 @Table(name = "medicos")
 @Getter
 @Setter

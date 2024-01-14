@@ -13,7 +13,7 @@ public class ValidadorMaisDeUmaConsultaEmUmDia implements ValidadorAgendamentoCo
     public void validar(DadosConsulta dados){
         
         if(repository.todasAsConsultasDeUmPacienteNumDia(dados.idPaciente(), dados.data())){
-            throw new ValidationException("Este médico já tem uma consulta neste horário.");
+            throw new ValidationException("Não é possível agendar mais de uma consulta em um mesmo dia.");
         }
     }
 }

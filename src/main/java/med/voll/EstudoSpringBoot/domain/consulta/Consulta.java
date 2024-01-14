@@ -11,7 +11,7 @@ import med.voll.EstudoSpringBoot.domain.paciente.Paciente;
 import java.time.LocalDateTime;
 
 @Table(name = "consultas")
-@Entity(name = "consulta")
+@Entity(name = "consultas")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class Consulta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "medico_id")
@@ -36,6 +36,10 @@ public class Consulta {
     }
 
     public Consulta(Long id, Medico medico, Paciente paciente, LocalDateTime data) {
+        this.id = id;
+        this.medico = medico;
+        this.paciente = paciente;
+        this.data = data;
     }
 
 

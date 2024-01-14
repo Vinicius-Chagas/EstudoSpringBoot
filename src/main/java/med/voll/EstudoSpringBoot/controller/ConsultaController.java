@@ -19,15 +19,14 @@ public class ConsultaController {
 
     @PostMapping
     @Transactional
-    private ResponseEntity cadastrarConsulta(@RequestBody @Valid DadosConsulta dados){
-        System.out.println(agenda);
+    public ResponseEntity cadastrarConsulta(@RequestBody @Valid DadosConsulta dados){
         var dto = agenda.agendar(dados);
         return ResponseEntity.ok().body(dto);
     }
 
     @DeleteMapping
     @Transactional
-    private ResponseEntity cancelarConsulta(@RequestBody @Valid DadosCancelamentoConsulta dados){
+    public ResponseEntity cancelarConsulta(@RequestBody @Valid DadosCancelamentoConsulta dados){
         agenda.cancelar(dados);
         return ResponseEntity.ok().body(null);
     }

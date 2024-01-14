@@ -1,1 +1,1 @@
-ALTER TABLE cadastros ADD COLUMN motivo_cancelamento varchar(100);
+ALTER TABLE consultas ADD COLUMN motivo_cancelamento varchar(100);

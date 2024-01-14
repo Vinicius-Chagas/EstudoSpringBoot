@@ -17,7 +17,7 @@ public class ValidadorConsultaNoMesmoHorarioEMedico implements ValidadorAgendame
         }
 
         if(repository.medicoComConsultaNaMesmaHora(dados.idMedico(),dados.data())){
-            throw new ValidationException("Não é possível agendar mais de uma consulta em um mesmo dia.");
+            throw new ValidationException("Este médico já tem uma consulta neste horário.");
         }
     }
 }

@@ -1,6 +1,7 @@
 package med.voll.EstudoSpringBoot.controller;
 
 import jakarta.validation.Valid;
+import med.voll.EstudoSpringBoot.domain.consulta.AgendaDeConsultas;
 import med.voll.EstudoSpringBoot.domain.usuario.DadosAutenticacao;
 import med.voll.EstudoSpringBoot.domain.usuario.Usuario;
 import med.voll.EstudoSpringBoot.infra.security.TokenDadosJwT;

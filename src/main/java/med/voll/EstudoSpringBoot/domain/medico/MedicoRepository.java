@@ -11,7 +11,7 @@ public interface MedicoRepository extends JpaRepository<Medico,Long> {
 
     Page<Medico> findAllByInativoFalse(Pageable pagina);
 
-    @Query("SELECT m FROM Medico m WHERE m.inativo = false AND m.especialidade = :especialidade AMD m.id NOT IN(SELECT c.medico.id FROM Consulta c WHERE c.data = :data) ORDER BY rand() LIMIT 1")
+    @Query("SELECT m FROM medicos m WHERE m.inativo = FALSE AND m.especialidade = :especialidade AND m.id NOT IN(SELECT c.medico.id FROM consultas c WHERE c.data = :data) ORDER BY rand() LIMIT 1")
     Medico escolherMedicoAleatorioLivreNaDate(Especialidade especialidade, LocalDateTime data);
 
 }
