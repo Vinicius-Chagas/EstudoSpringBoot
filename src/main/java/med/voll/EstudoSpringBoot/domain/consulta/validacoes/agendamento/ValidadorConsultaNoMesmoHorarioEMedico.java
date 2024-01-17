@@ -1,4 +1,4 @@
-package med.voll.EstudoSpringBoot.domain.consulta.validacoes;
+package med.voll.EstudoSpringBoot.domain.consulta.validacoes.agendamento;
 
 import jakarta.validation.ValidationException;
 import med.voll.EstudoSpringBoot.domain.consulta.ConsultaRepository;

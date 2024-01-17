@@ -1,5 +1,6 @@
 package med.voll.EstudoSpringBoot.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 
 import med.voll.EstudoSpringBoot.domain.paciente.*;
@@ -15,6 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("pacientes")
+@SecurityRequirement(name = "bearer-key")
+@SecurityRequirement(name = "bearer-key")
 public class PacienteController {
 
     @Autowired

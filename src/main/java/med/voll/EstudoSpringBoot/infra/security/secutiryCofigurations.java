@@ -26,8 +26,9 @@ public class secutiryCofigurations {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http.csrf(crsf -> crsf.disable())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.POST,"/login")
-                        .permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                        .requestMatchers(HttpMethod.GET,"/v3/api-docs/**","swagger-ui.html","/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                         .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
         // Desabilita o Statefull e define Stateless como padrão, não restringir requests sem token para login e definir filtro que vem antes
